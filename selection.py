@@ -1,26 +1,30 @@
-import pygame
-from vizfunc import pygameInit
+from notherviz import pygameInit
 from numpy import random
+import time
 
-def loopiter(i):
-    if i < len(A)-1:
+def selection(A):
+    i = 0
+    while i < len(A)-1:
         minIndex = i
         j = i + 1
-        print("first j: ", j)
         while j < len(A):
             if A[j] < A[minIndex]:
-                print("hello")
                 minIndex = j
             j += 1
         if minIndex != i:
             savedminindex = A[minIndex]
             A[minIndex] = A[i]
             A[i] = savedminindex
+        
+        i += 1
 
-i = 0
+        # Comment out if you want it to faster
+        time.sleep(0.05) 
+
+        pygameInit(A)
 
 A = []
 for i in range(100): 
     A.append(random.randint(1000)) 
 
-pygameInit(loopiter, A)
+selection(A)

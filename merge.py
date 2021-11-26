@@ -1,20 +1,16 @@
 from numpy import random
 import time 
-import pygame
 from notherviz import pygameInit
-from vizfunc import pygameInit as otherpygameInit
 
-def mergesort(A, startindex):
+def mergesort(A, startindex, fullarray):
     if len(A) == 1:
         return A
 
     left = A[0:int(len(A)/2)]
     right = A[int(len(A)/2):]
 
-    left = mergesort(left, startindex)
-    right = mergesort(right, int(len(A)/2))
-
-    global fullarray 
+    left = mergesort(left, startindex, fullarray)
+    right = mergesort(right, int(len(A)/2), fullarray)
 
     endofslice = startindex+len(left)
     endofrightslice = int(len(A)/2)+len(right)
@@ -22,11 +18,15 @@ def mergesort(A, startindex):
     fullarray[int(len(A)/2):endofrightslice] = right 
     pygameInit(fullarray)
 
-    return merge(left, right)
+    return merge(left, right, fullarray)
 
 
-def merge(A, B):
+def merge(A, B, fullarray):
     C = []
+
+    printfinal = False
+    if len(A) + len(B) == len(fullarray):
+        printfinal = True
 
     while len(A) > 0 and len(B) > 0:
         if A[0] > B[0]:
@@ -45,20 +45,19 @@ def merge(A, B):
         B.pop(0)  
 
     time.sleep(0.05)
+
+    if printfinal:
+        pygameInit(C)
     
     return C
 
 A = []
 for i in range(100): 
     A.append(random.randint(1000)) 
-fullarray = A
 
-C = mergesort(A, 0)
-running = True
-def nothing(no):
-    i = 1
-while running: 
-    otherpygameInit(nothing, C)
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
+C = mergesort(A, 0, A)
+
+def merge_test():
+    assert mergesort([1,4,512,25,2], 0, [1,4,512,25,2]) == [1,2,4,25,512]
+
+merge_test()
