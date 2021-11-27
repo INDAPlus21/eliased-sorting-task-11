@@ -2,7 +2,7 @@ from notherviz import pygameInit
 from numpy import random
 import time
 
-def selection(A):
+def selection_sort(A):
     i = 0
     while i < len(A)-1:
         minIndex = i
@@ -22,9 +22,11 @@ def selection(A):
         time.sleep(0.05) 
 
         pygameInit(A)
+    return A
 
-A = []
-for i in range(100): 
-    A.append(random.randint(1000)) 
+if __name__ == "__main__":
+    A = []
+    for i in range(100): 
+        A.append(random.randint(1000)) 
 
-selection(A)
+    print(selection_sort(A))

@@ -14,15 +14,12 @@ def bogo_sort(A):
         if sorted:
             return A 
 
-A = []
-for i in range(6): 
-    A.append(random.randint(1000))
+if __name__ == "__main__":
+    A = []
+    for i in range(6): 
+        A.append(random.randint(1000))
 
-print(A)
+    print(A)
 
-print(bogo_sort(A))
+    print(bogo_sort(A))
 
-def test_bogo():
-    assert bogo_sort([12,51, 124, 23, 5, 2]) == [2,5,12,23,51,124]
-
-test_bogo()

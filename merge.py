@@ -2,15 +2,15 @@ from numpy import random
 import time 
 from notherviz import pygameInit
 
-def mergesort(A, startindex, fullarray):
+def merge_sort(A, startindex, fullarray):
     if len(A) == 1:
         return A
 
     left = A[0:int(len(A)/2)]
     right = A[int(len(A)/2):]
 
-    left = mergesort(left, startindex, fullarray)
-    right = mergesort(right, int(len(A)/2), fullarray)
+    left = merge_sort(left, startindex, fullarray)
+    right = merge_sort(right, int(len(A)/2), fullarray)
 
     endofslice = startindex+len(left)
     endofrightslice = int(len(A)/2)+len(right)
@@ -51,13 +51,9 @@ def merge(A, B, fullarray):
     
     return C
 
-A = []
-for i in range(100): 
-    A.append(random.randint(1000)) 
+if __name__ == "__main__":
+    A = []
+    for i in range(100): 
+        A.append(random.randint(1000)) 
 
-C = mergesort(A, 0, A)
-
-def merge_test():
-    assert mergesort([1,4,512,25,2], 0, [1,4,512,25,2]) == [1,2,4,25,512]
-
-merge_test()
+    C = merge_sort(A, 0, A)

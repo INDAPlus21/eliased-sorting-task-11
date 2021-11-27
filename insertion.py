@@ -3,7 +3,7 @@ from notherviz import pygameInit
 import time
 
 
-def insertionsort(A):
+def insertion_sort(A):
     whileiter = 0 
     while whileiter < len(A):
         x = A[whileiter]
@@ -17,16 +17,11 @@ def insertionsort(A):
         time.sleep(0.05)
     return A
 
+if __name__ == "__main__":
+    A = []
+    for i in range(100): 
+        A.append(random.randint(1000))
 
-A = []
-for i in range(100): 
-    A.append(random.randint(1000))
+    print(A)
 
-print(A)
-
-# If no error appears, it has passed the tests
-def insertion_test():
-    assert insertionsort([1,24,23,14,2]) == [1,2,14,23,24]
-
-insertionsort(A)
-insertion_test()
+    insertion_sort(A)
